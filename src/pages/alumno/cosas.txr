@@ -1,0 +1,12 @@
+<div>
+           <h1>
+            Alumnos
+           </h1>
+           <ul>
+            {alumnos.map(x => {
+              return (
+                <li key={x.id }>{x.nombre}</li>
+              )
+            })}
+           </ul>
+</div>
