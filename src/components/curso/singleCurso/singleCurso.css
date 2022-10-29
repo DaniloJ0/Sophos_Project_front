@@ -1,0 +1,11 @@
+.card{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 16rem;
+}
+
+.card:hover{
+    -webkit-transform:scale(1.02);
+    transform:scale(1.05);
+    transition: 20ms;
+}

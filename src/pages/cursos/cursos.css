@@ -1,0 +1,39 @@
+.designCursos{
+    display: flex;
+    margin-top: 20px;
+}
+
+.buscador{
+    padding: 2px;
+}
+
+.filterCurso{
+    width: 20%;
+    margin: 0 20px ;
+}
+
+.cursosFlex{
+    width: 80%;
+    padding: 20px 1px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filterTitle{
+    text-align: center;
+    font-family: system-ui;
+}
+
+.searchSection{
+    padding: 20px;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: rgb(159, 157, 157);
+}
+
+
+.btnCrearCurso{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}

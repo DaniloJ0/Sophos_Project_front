@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react'
 import axios from 'axios'
-import Contenido from './Contenido'
+import Contenido from '../../components/Alumnos/contenido/Contenido'
 
 function Alumno() {
     const [alumnos, setAlumnos ] = useState([])
