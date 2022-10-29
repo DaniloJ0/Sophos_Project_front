@@ -1,0 +1,16 @@
+.contenido{
+    display: flex;
+    flex-direction: column
+}
+
+.infoContenido{
+    width: 70%;
+    border: 1px solid;
+    padding: 20px;
+}
+
+.nombreCourse{
+    margin-bottom: 60px;
+}
+
+

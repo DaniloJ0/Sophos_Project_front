@@ -1,0 +1,14 @@
+.mensaje {
+        font-family: system-ui;
+        font-size: 30px;
+        text-align: center;
+}
+
+.tableDesign{
+    text-align: center;
+}
+
+.linkId{
+    color: red;    
+    text-decoration: none;
+}

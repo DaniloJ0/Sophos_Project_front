@@ -9,7 +9,7 @@
 
 .filterCurso{
     width: 20%;
-    margin: 0 20px ;
+    margin: 20px;
 }
 
 .cursosFlex{
@@ -29,6 +29,7 @@
     border: 2px solid;
     border-radius: 10px;
     border-color: rgb(159, 157, 157);
+    box-shadow: 2px 3px 5px  rgb(184, 181, 181);
 }
 
 
@@ -36,4 +37,10 @@
     margin-top: 40px;
     display: flex;
     justify-content: center;
+}
+
+
+.cursoLink{
+    text-decoration: none;
+    color: black;
 }

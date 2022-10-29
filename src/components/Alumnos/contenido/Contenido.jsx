@@ -9,10 +9,10 @@ import swal from 'sweetalert';
 import './contenido.css'
 function Contenido() {
   const [tabKey, initTabKey] = useState('one')
-  const [formActive, formAct] = useState(false)
+  const [formActive, setFormAct] = useState(false)
 
   const editarButton = ()=> {
-    formAct(!formActive)
+    setFormAct(!formActive)
     //Pasar info al formulario
   }
 
@@ -37,6 +37,8 @@ function Contenido() {
     <div className='contenido'>
       <div className='detalles'>
         <h1 className='tituloNombre'>Alumno</h1>
+        <h5 className="infoH5">Infomación</h5>
+        <hr/>
         <div className='orgFlex'>
           <div className='infoAlumno'>
             <p className='textInfoAlumno'><strong>Nombre:</strong> Rafael Nadal</p>

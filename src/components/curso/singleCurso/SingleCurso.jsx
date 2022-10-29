@@ -1,16 +1,18 @@
 import Card from 'react-bootstrap/Card';
-import imagen from '../../../img/curso.jpg'
+import imagen from '../../../img/cursos/1.jpg'
+import Badge from 'react-bootstrap/Badge';
 import "./singleCurso.css"
 
 function SingleCurso() {
   return (
       <Card className="card">
-        <Card.Img variant="top" src={imagen} />
+        <Card.Img variant="top" src={imagen} alt="imageCurso" />
         <Card.Body>
-          <Card.Title>Programacion orientada a objetos</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+          <Card.Title className=''>Programación orientada a objetos</Card.Title>
+          <Card.Text className='badgeInfo'>
+             <Badge bg="primary">Id: 1</Badge>
+             <Badge bg="secondary">Cupos: 9</Badge>
+             <Badge bg="secondary">Alumnos: 50</Badge>
           </Card.Text>
         </Card.Body>
       </Card>

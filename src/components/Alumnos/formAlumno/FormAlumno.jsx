@@ -6,12 +6,12 @@ function FormAlumno() {
     <Form>
       <Form.Label>Nombre</Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="ingresa el nombre" value="Rafael" />
+        <Form.Control type="text" placeholder="Ingresa el nombre" value="Rafael" />
       </Form.Group>
 
       <Form.Label>Apellido</Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="ingresa el apellido" value="Nadal" />
+        <Form.Control type="text" placeholder="Ingresa el apellido" value="Nadal" />
       </Form.Group>
 
       {/* <Form.Label>Departmento</Form.Label>
