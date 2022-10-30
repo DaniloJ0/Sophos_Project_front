@@ -1,8 +1,8 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import "./buscador.css"
+import "./buscadorCurso.css"
 
-function Buscador() {
+function BuscadorCurso() {
   return (
     <Form className="buscador">
             <Form.Control
@@ -16,4 +16,4 @@ function Buscador() {
   )
 }
 
-export default Buscador
+export default BuscadorCurso

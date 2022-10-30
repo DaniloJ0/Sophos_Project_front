@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useParams } from "react-router-dom"
 import { Tab, Tabs } from 'react-bootstrap'
 import DataCurso from '../dataCurso/DataCurso'
 import FormAlumno from '../formAlumno/FormAlumno'
@@ -10,6 +11,7 @@ import './contenido.css'
 function Contenido() {
   const [tabKey, initTabKey] = useState('one')
   const [formActive, setFormAct] = useState(false)
+  const {id} = useParams()
 
   const editarButton = ()=> {
     setFormAct(!formActive)

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import Buscador from '../../components/buscador/Buscador'
+import BuscadorCurso from '../../components/curso/buscadorCurso/BuscadorCurso'
 import SingleCurso from '../../components/curso/singleCurso/SingleCurso'
 import SwitchesCurso from '../../components/curso/switches/SwitchesCurso'
 import Button from 'react-bootstrap/Button';
-import "./cursos.css"
 import FormCurso from '../../components/curso/formCurso/FormCurso';
 import { Link } from 'react-router-dom';
+import "./cursos.css"
+
+
 function Cursos() {
   const [createOn, setCreateCourse] = useState(false) 
  //Falso -> True -> Muestra -> Cierra -> True 
@@ -22,7 +24,7 @@ function Cursos() {
                 <div className='searchSection'>
                     <h3 className='filterTitle'>Cursos</h3>
                     <div className='buscador'>
-                        <Buscador/> 
+                        <BuscadorCurso/> 
                         <div>
                             <hr/>
                             <SwitchesCurso/>

@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom"
 import React, { useState } from 'react'
 import { Tab, Tabs } from 'react-bootstrap'
-
 // import FormAlumno from '../formAlumno/FormAlumno'
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';

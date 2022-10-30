@@ -7,6 +7,7 @@ import Facultades from "./pages/facultades/Facultades";
 import NotFound from "./pages/notFound/NotFound";
 import Navbar from "./components/navbar/NavbarG";
 import Curso from "./pages/curso/Curso";
+import Alumnos from "./pages/alumnos/Alumnos";
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/alumnos" element={<Alumno />}/>
-        {/* <Route path="/alumnos/:id" element={<Alumno />}/> */}
+        <Route path="/alumnos" element={<Alumnos />}/>
+        <Route path="/alumnos/:id" element={<Alumno />}/>
         <Route path="/profesores" element={<Profesor />}/>
         {/* <Route path="/profesores/:id" element={<Profesor />}/> */}
         <Route path="/cursos" element={<Cursos />}/>
