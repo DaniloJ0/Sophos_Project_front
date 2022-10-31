@@ -1,0 +1,13 @@
+.cardSingleHome{
+    width: 18rem;
+    box-shadow: 5px 3px 5px rgb(98, 97, 97);
+}
+
+.textCustom{
+    font-size: 8rem;
+}
+
+.textCustom:hover{
+    color: #eac574;
+    transition: 200ms;
+}

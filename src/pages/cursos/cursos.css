@@ -13,8 +13,7 @@
 }
 
 .cursosFlex{
-    width: 80%;
-    padding: 20px 1px;
+    margin-top: 1.4rem;
     display: flex;
     flex-wrap: wrap;
 }
@@ -26,7 +25,6 @@
 
 .searchSection{
     padding: 20px;
-    border: 2px solid;
     border-radius: 10px;
     border-color: rgb(159, 157, 157);
     box-shadow: 2px 3px 5px  rgb(184, 181, 181);
@@ -39,8 +37,12 @@
     justify-content: center;
 }
 
-
 .cursoLink{
     text-decoration: none;
     color: black;
+}
+
+.cardSingle{
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 }

@@ -2,29 +2,30 @@ import React from 'react'
 import Table from 'react-bootstrap/Table';
 import "./alumTableCurso.css" 
 
-function AlumTableCurso() {
-    const datos = [1]
+function AlumTableCurso({alumno}) {
+    // console.log("alumno 1", alumno && alumno)+
+    // const [infoCurso, setCursos] = useState([])
   return (
-    !datos.length?
+    alumno && alumno.length===0?
     <p className='mensaje'>No hay ningun alumno matriculado </p>:
     <Table striped bordered hover size="sm">
                 <thead>
                   <tr className='tableDesign'>
                     <th>Id</th>
                     <th>Nombre</th>
-                    <th>Facultad</th>
+                    <th>Apellido</th>
                     <th>Semestre</th>
                   </tr>
                 </thead>
                 <tbody>
                   {
-                    datos.map(curso => {
+                   alumno && alumno.map((alum, index) => {
                       return (
-                      <tr className='tableDesign'>
-                        <td><a href="/alumnos/1" className='linkId' ><strong>1</strong></a></td>
-                        <td>Mark</td>
-                        <td>Informatica</td>
-                        <td>9</td>
+                      <tr key={index} className='tableDesign'>
+                        <td><a href={`/alumnos/${alum.id}`} className='linkId' ><strong>{alum.id}</strong></a></td>
+                        <td>{alum.nombre} </td>
+                        <td>{alum.apellido}</td>
+                        <td>{alum.semestre}</td>
                       </tr>
                       )
                     })

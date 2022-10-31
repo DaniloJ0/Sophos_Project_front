@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -6,8 +7,24 @@ import "./formCurso.css"
 //true 
 function FormCurso() {
   const [show, setShow] = useState(true);
-
+  const [periodos, setPeriodos] = useState([])
   const handleClose = () => setShow(false);
+
+  useEffect(()=>{
+    const getPeriodos = async () => {
+      try {
+        const response = await axios.get(`https://localhost:7268/api/periodos`)
+        const { data } = response
+        console.log(data)
+        setPeriodos(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getPeriodos()
+  }, [])
+
+  const createCurso = () => {}
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -46,16 +63,18 @@ function FormCurso() {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Select aria-label="Default select example">
             <option>2022-2</option> 
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {periodos && periodos.map(per => {
+              return (
+                <option key={per.id} >{`${per.year}-${per.semestre}`}</option>
+              )
+            })}
           </Form.Select>
         </Form.Group>
 
     </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" type="submit">
+          <Button variant="success" type="submit" onClick={createCurso}>
             Crear curso
           </Button>
         </Modal.Footer>

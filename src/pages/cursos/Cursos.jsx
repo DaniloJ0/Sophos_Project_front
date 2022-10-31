@@ -1,21 +1,34 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState } from 'react'
+import axios from 'axios'
 import BuscadorCurso from '../../components/curso/buscadorCurso/BuscadorCurso'
 import SingleCurso from '../../components/curso/singleCurso/SingleCurso'
 import SwitchesCurso from '../../components/curso/switches/SwitchesCurso'
 import Button from 'react-bootstrap/Button';
 import FormCurso from '../../components/curso/formCurso/FormCurso';
-import { Link } from 'react-router-dom';
 import "./cursos.css"
 
 
 function Cursos() {
   const [createOn, setCreateCourse] = useState(false) 
+  const [curso, setCursos ] = useState([])
  //Falso -> True -> Muestra -> Cierra -> True 
   const editarButton = ()=> {
     setCreateCourse(!createOn)
     //Pasar info al formulario
   }
-  const curse = [1,2,3,4,5,6]
+
+const getCursos = async () =>{
+    try {
+       const response = await axios.get("https://localhost:7268/api/Cursos")
+       const {data} =  response
+       setCursos(data)
+     } catch (error) {
+       console.log(error)
+    }
+}
+useEffect(()=>{
+   getCursos()
+}, [])
 
   return (
     <>
@@ -36,14 +49,18 @@ function Cursos() {
                     </div>
                 </div>
             </div>
-            <div className='cursosFlex'>
-                {curse.map((course, index) => {
-                    return (
-                        <a key={index+1} href={`cursos/${index}`} className="cursoLink">
-                            <SingleCurso cursoId={index}/>
-                        </a>
-                    )
-                })}                
+            <div>
+                <div className='cursosFlex'>
+                    {curso.map((course) => {
+                        return (
+                            <div className="cardSingle">
+                                <a key={course.id} href={`cursos/${course.id}`} className="cursoLink">
+                                    <SingleCurso dataCurso={course}/>
+                                </a>
+                            </div>
+                        )
+                    })}                
+                </div>
             </div>
         </div>
     </>

@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import "./formEditCurso.css"
 //true 
-function FormEditCurso() {
+function FormEditCurso({datosCurso}) {
+  console.log("llega: ", datosCurso)
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
-  const profe = null;
+  const [periodos, setPeriodos] = useState([])
+
+  useEffect(()=>{
+    const getPeriodos = async () => {
+      try {
+        const response = await axios.get(`https://localhost:7268/api/periodos`)
+        const { data } = response
+        console.log(data)
+        setPeriodos(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getPeriodos()
+  }, [])
+
+
+  const editCurso = () => {}
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -19,43 +38,44 @@ function FormEditCurso() {
 
       <Form.Label><strong>Nombre </strong> </Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="Nombre del curso" value="Programación orientada a objetos" />
+        <Form.Control type="text" placeholder="Nombre del curso" defaultValue ={datosCurso.nombre} />
       </Form.Group>
 
       <Form.Label><strong> Creditos</strong> </Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="Número de creditos" value="9" />
+        <Form.Control type="text" placeholder="Número de creditos" defaultValue ={datosCurso.creditos} />
       </Form.Group>
 
-      <Form.Label><strong> Cupos</strong> </Form.Label>
+      <Form.Label ><strong> Cupos</strong> </Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="Cantidad de cupos"  value="50"/>
+        <Form.Control type="text" placeholder="Cantidad de cupos"  defaultValue ={datosCurso.cupos} />
       </Form.Group>
 
       <Form.Label><strong>Profesor </strong>  (Opcional)</Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="Identificación del profesor"  value={profe? "Jaime": ""}/>
+        <Form.Control type="text" placeholder="Identificación del profesor"  defaultValue ={datosCurso.idProfesor ==null?"" : datosCurso.idProfesor}/>
       </Form.Group>
 
       <Form.Label><strong>Pre-requisito </strong></Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="Id del curso pre-requisito"  value="1"/>
+        <Form.Control type="text" placeholder="Id del curso pre-requisito"  defaultValue ="1"/>
       </Form.Group>
 
       <Form.Label><strong>Periodo </strong> </Form.Label>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Select aria-label="Default select example">
-            <option>2022-2</option> 
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {periodos && periodos.map(per => {
+              return (
+                <option key={per.id} >{`${per.year}-${per.semestre}`}</option>
+              )
+            })}
           </Form.Select>
         </Form.Group>
 
     </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" type="submit">
+          <Button variant="success" type="submit" onClick={editCurso}>
             Editar curso
           </Button>
         </Modal.Footer>

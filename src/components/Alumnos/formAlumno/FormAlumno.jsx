@@ -1,39 +1,72 @@
+import React, {useEffect, useState } from 'react'
+import axios from 'axios'
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-function FormAlumno() {
+function FormAlumno({datosCurso}) {
+  const [facultades, setFacultades ] = useState([])
+  const [show, setShow] = useState(true);
+  const handleClose = () => setShow(false);
+
+  useEffect(()=>{
+    const getAlumnos = async () =>{
+        try {
+            const response = await axios.get(`https://localhost:7268/api/Facultades`)
+            const {data} =  response
+            setFacultades(data)
+          } catch (error) {
+            console.log(error)
+        }
+    }
+    getAlumnos()
+  }, [])
+
+  const editButton = () => {}
+
+
+
   return (
-    <Form>
-      <Form.Label>Nombre</Form.Label>
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title className='createCourseTittle'>Editar Alumno</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+
+      <Form.Label><strong>Nombre </strong> </Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="Ingresa el nombre" value="Rafael" />
+        <Form.Control type="text" defaultValue ={datosCurso.infoAlumno.nombre}  />
       </Form.Group>
 
-      <Form.Label>Apellido</Form.Label>
+      <Form.Label><strong> Apellido</strong> </Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="Ingresa el apellido" value="Nadal" />
+        <Form.Control type="text"  defaultValue ={datosCurso.infoAlumno.apellido} />
       </Form.Group>
 
-      {/* <Form.Label>Departmento</Form.Label>
+      <Form.Label><strong> Semestre </strong> </Form.Label>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="text" placeholder="ingresa nombre" value="Informatica" />
-      </Form.Group> */}
-      <div className="">
-        <Form.Label>Departmento</Form.Label>
+        <Form.Control type="text"   defaultValue ={datosCurso.infoAlumno.semestre}/>
+      </Form.Group>
+
+      <Form.Label>Departmento</Form.Label>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Select aria-label="Default select example">
-            <option>Informatica</option> 
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option key={datosCurso.infoAlumno.idDeptNavigation.id}>{datosCurso.infoAlumno.idDeptNavigation.name}</option> 
+            {facultades.map(facu => {
+              return (<option key={facu.id}>{facu.name}</option>)
+            })}
+            
           </Form.Select>
         </Form.Group>
-      </div>
-      
-      <Button variant="primary" type="submit">
-        Editar
-      </Button>
     </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" type="submit" onClick={editButton}>
+            Editar Alumno
+          </Button>
+        </Modal.Footer>
+      </Modal>
   );
 }
 

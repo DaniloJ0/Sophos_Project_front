@@ -1,0 +1,28 @@
+.mensaje{
+    font-family: system-ui;
+    font-size: 30px;
+    text-align: center;
+}
+
+.btnEditDelet{
+    width: 5rem;
+}
+
+.linkId{
+    color: red;    
+    text-decoration: none;
+}
+
+
+.designTable{
+    text-align: center
+}
+
+.linkDetalles > span{
+    color: black;
+    cursor: pointer;
+}
+
+.linkDetalles > span:hover{
+    color: red;
+}

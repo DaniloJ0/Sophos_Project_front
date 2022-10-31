@@ -1,8 +1,9 @@
 import React from 'react'
+import "./notFound.css"
 
 function NotFound() {
   return (
-    <div>NotFound</div>
+    <div className='notFound'>Not Found</div>
   )
 }
 

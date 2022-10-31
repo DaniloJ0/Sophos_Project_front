@@ -24,7 +24,7 @@ function App() {
         <Route path="/facultades" element={<Facultades/>}/>
         {/* <Route path="/facultades/:id" element={<Facultad />}/> */}
 
-        <Route path="*" element={<NotFound />}/>
+        <Route path="/*" element={<NotFound />}/>
       </Routes>
      </Router>
   );

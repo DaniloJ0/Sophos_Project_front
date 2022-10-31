@@ -1,22 +1,36 @@
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { useParams } from "react-router-dom"
-import React, { useState } from 'react'
 import { Tab, Tabs } from 'react-bootstrap'
-// import FormAlumno from '../formAlumno/FormAlumno'
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
-import "./curso.css"
 import AlumTableCurso from "../../components/curso/tablaCursoAlum/AlumTableCurso";
 import FormEditCurso from "../../components/curso/formEditCurso/FormEditCurso";
+import "./curso.css"
 
 function Curso() {
   const [formActive, setFormAct] = useState(false)
   const {id} = useParams()
+  const [infoCurso, setCursos] = useState([])
+  
+  useEffect(()=>{
+    const getCurso = async () => {
+      try {
+        const response = await axios.get(`https://localhost:7268/api/Cursos/${id}`)
+        const { data } = response
+        console.log(data)
+        setCursos(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getCurso()
+  }, [])
+  
   const editarButton = ()=> {
     setFormAct(!formActive)
   }
-
   //const eliminaAlumno 
-
   const eliminarButton = ()=> {
       swal({
         title: "Eliminar Curso",
@@ -35,27 +49,30 @@ function Curso() {
   return (
     <div className='contenido'>
       <div className='detalles'>
-        <h1 className='tituloNombre'>Programación orientada a objetos</h1>
+        <h1 className='tituloNombre'>{infoCurso.curso &&  infoCurso.curso.infoCurso.nombre}</h1>
         <h5 className="infoH5">Infomación</h5>
         <hr/>
         <div className='orgFlex'>
           <div className='infoAlumno'>
-            <p className='textInfoAlumno'><strong>Profesor:</strong> Sin asignar</p>
-            <p className='textInfoAlumno'><strong>Creditos:</strong> 6 </p>
-            <p className='textInfoAlumno'><strong>Cupos:</strong> 50</p>
-            <p className='textInfoAlumno'><strong>Pre-requisito:</strong> Este curso no cuenta con pre-requisito </p>
-            <p className='textInfoAlumno'><strong>Periodo:</strong> 2022-2</p>
+            <p className='textInfoAlumno'><strong>Profesor: </strong> 
+            {infoCurso.curso == null? " No asignado" : infoCurso.curso.infoCurso.idProfesorNavigation==null
+            ? "No asignado"
+            : `${infoCurso.curso.infoCurso.idProfesorNavigation.nombre} ${infoCurso.curso.infoCurso.idProfesorNavigation.apellido}`} </p>
+            <p className='textInfoAlumno'><strong>Creditos: </strong> {infoCurso.curso &&  infoCurso.curso.infoCurso.creditos} </p>
+            <p className='textInfoAlumno'><strong>Cupos: </strong>{infoCurso.curso &&  infoCurso.curso.infoCurso.cupos} </p>
+            <p className='textInfoAlumno'><strong>Pre-requisito: </strong> {infoCurso.preRequisito} </p>
+            <p className='textInfoAlumno'><strong>Periodo: </strong> {infoCurso.curso &&  `${infoCurso.curso.infoCurso.idPeriodoNavigation.year}-${infoCurso.curso.infoCurso.idPeriodoNavigation.semestre}`}</p>
           </div>
           <div className='btnsAlumnos'>
             <Button variant="primary" onClick={editarButton}>Editar</Button>{' '}
             <Button variant="danger" onClick={eliminarButton}>Eliminar</Button>{' '}
           </div>
-          {formActive && <FormEditCurso/>}
+          {formActive && <FormEditCurso datosCurso={infoCurso.curso && infoCurso.curso.infoCurso}/>}
         </div>
         <div>
           <Tabs >
             <Tab eventKey="one" title="Alumnos Matriculados " className='tabs'>
-                <AlumTableCurso/>
+                <AlumTableCurso alumno={infoCurso.curso && infoCurso.curso.matriculados}/>
             </Tab>
           </Tabs>
           </div>

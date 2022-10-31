@@ -1,6 +1,4 @@
 .card{
-    margin-left: 20px;
-    margin-bottom: 20px;
     width: 16rem;
     filter: brightness(100%);
 }
@@ -15,4 +13,11 @@
 .badgeInfo {
     display: flex;
     justify-content: space-evenly;
+}
+.bodyCard{
+    height: 7rem;
+}
+
+.imgCard{
+    height: 10rem;
 }
