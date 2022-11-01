@@ -13,10 +13,10 @@ function NavbarG() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href='/cursos'>Cursos</Nav.Link>
+            <Nav.Link href='/matricula'>Matricular</Nav.Link>
             <NavDropdown title="Personal" id="collasible-nav-dropdown">
               <NavDropdown.Item href='/profesores'>Profesores</NavDropdown.Item>
               <NavDropdown.Item href='/alumnos'>Alumnos</NavDropdown.Item>
-              <NavDropdown.Item href='/facultades'>Facultades</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

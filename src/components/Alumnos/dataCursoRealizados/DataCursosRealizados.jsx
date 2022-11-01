@@ -3,7 +3,6 @@ import Table from 'react-bootstrap/Table';
 import '../dataCursoMatriculados/dataCurso.css'
 
 function DataCursosRealizados({datos}) {
-  console.log("realiz",datos)
   return (
     datos && datos.length===0?
     <p className='mensaje'>El alumno no ha realizado ningún curso. </p>:

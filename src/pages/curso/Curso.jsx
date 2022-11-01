@@ -60,6 +60,7 @@ function Curso() {
             : `${infoCurso.curso.infoCurso.idProfesorNavigation.nombre} ${infoCurso.curso.infoCurso.idProfesorNavigation.apellido}`} </p>
             <p className='textInfoAlumno'><strong>Creditos: </strong> {infoCurso.curso &&  infoCurso.curso.infoCurso.creditos} </p>
             <p className='textInfoAlumno'><strong>Cupos: </strong>{infoCurso.curso &&  infoCurso.curso.infoCurso.cupos} </p>
+            <p className='textInfoAlumno'><strong>Alumnos: </strong> {infoCurso.curso &&  infoCurso.curso.matriculados.length}</p>
             <p className='textInfoAlumno'><strong>Pre-requisito: </strong> {infoCurso.preRequisito} </p>
             <p className='textInfoAlumno'><strong>Periodo: </strong> {infoCurso.curso &&  `${infoCurso.curso.infoCurso.idPeriodoNavigation.year}-${infoCurso.curso.infoCurso.idPeriodoNavigation.semestre}`}</p>
           </div>
