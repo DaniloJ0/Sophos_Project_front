@@ -1,0 +1,27 @@
+.flexProfesor{
+    display: flex;
+    margin-top: 10px;
+}
+
+.searchBar{
+    width: 20%;
+    margin-top: 20px;
+}
+
+.tableProf{
+    margin-left: 2rem;
+}
+
+
+.linkIdProfe{
+    color: red;
+    cursor: pointer;
+}
+
+.linkIdProfe:hover{
+    color: rgb(71, 71, 205);
+}
+
+
+
+

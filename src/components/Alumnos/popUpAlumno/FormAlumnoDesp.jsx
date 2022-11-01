@@ -54,7 +54,7 @@ function FormAlumnoDesp() {
     } catch (error) {
       swal({
           title: "Hubo un problema",
-          text: "Pruebe seleccionando una facultad diferente antes de escoger la objetiva",
+          text: "Pruebe seleccionando una facultad diferente antes de escoger la deseada",
           icon: "error"
       })
     }
