@@ -86,7 +86,7 @@ useEffect(()=>{
 
   return (
     <>
-      <div>
+      <div className="photo">
         <img src={homeImage} alt="FondoHome" className='homePhoto'/>
       </div>
       <div className='flexHome'>

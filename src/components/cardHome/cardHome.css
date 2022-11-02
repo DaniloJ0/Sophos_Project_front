@@ -9,5 +9,11 @@
 
 .textCustom:hover{
     color: #eac574;
-    transition: 200ms;
+    transition: 100ms;
 }
+
+/* .fontTitle{
+    font-family: 'Jost', sans-serif;
+    text-align: center;
+    font-size: 100px;
+} */

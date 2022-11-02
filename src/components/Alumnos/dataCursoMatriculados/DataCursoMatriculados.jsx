@@ -1,7 +1,7 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table';
 import axios from 'axios'
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 import './dataCurso.css'
 
@@ -9,13 +9,13 @@ function DataCursoMatriculados({datos}) {
   async function completarCurso(id)  {
     try {
       await axios.delete(`https://localhost:7268/api/MatriculaAlumnos/${id}/Completado`)
-      swal({text: "El curso se ha completado",
+      swal.fire({text: "El curso se ha completado",
       icon: "success",
       timer: 1200
     }).then(res => window.location.reload())
     } catch (error) {
       console.log(error)
-      swal({text: "No se pudo realizar la petición",
+      swal.fire({text: "No se pudo realizar la petición",
       icon: "error"})
     }
   }
@@ -24,7 +24,7 @@ function DataCursoMatriculados({datos}) {
     
     try {
       await axios.delete(`https://localhost:7268/api/MatriculaAlumnos/${id}/Realizado`)
-      swal({text: "El Curso se ha eliminado correctamente",
+      swal.fire({text: "El Curso se ha eliminado correctamente",
       icon: "success",
       timer: 1200
     }).then(res => window.location.reload())

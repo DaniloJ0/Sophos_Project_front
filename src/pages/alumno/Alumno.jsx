@@ -5,7 +5,7 @@ import { Tab, Tabs } from 'react-bootstrap'
 import DataCursoMatriculados from '../../components/Alumnos/dataCursoMatriculados/DataCursoMatriculados'
 import FormAlumno from '../../components/Alumnos/formAlumno/FormAlumno'
 import Button from 'react-bootstrap/Button';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import "./alumno.css"
 import DataCursosRealizados from '../../components/Alumnos/dataCursoRealizados/DataCursosRealizados'
 
@@ -36,14 +36,14 @@ function Alumno() {
     }
 
     const eliminarButton = ()=> {
-      swal({
+      swal.fire({
         title: "Eliminar Alumno",
         text: '¿Está seguro que desea eliminar el alumno?',
         icon: "warning",
         buttons: ["Cancelar", "Aceptar"]
       }).then(res =>{
         if(res){
-          swal({text: "El alumno se ha eliminado correctamente",
+          swal.fire({text: "El alumno se ha eliminado correctamente",
           icon: "success"
         })
         }
@@ -70,10 +70,10 @@ function Alumno() {
           </div>
           <div className='cursosSection'>
             <Tabs activeKey={tabKey} onSelect={(e) => initTabKey(e)}>
-              <Tab eventKey="one" title="Cursos Matriculados" className='tabs'>
+              <Tab eventKey="one" title="Cursos Matriculados" className='tabs table-responsive'>
                 <DataCursoMatriculados datos={alumnos.infoAlumno && alumnos.cursosMatriculados}/>
               </Tab>
-              <Tab eventKey="two" title="Cursos Realizados" className='tabs'>
+              <Tab eventKey="two" title="Cursos Realizados" className='tabs table-responsive'>
                 <DataCursosRealizados datos={alumnos.infoAlumno && alumnos.cursoRealizados}/>
               </Tab>
             </Tabs>

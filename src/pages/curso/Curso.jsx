@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useParams } from "react-router-dom"
 import { Tab, Tabs } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 import AlumTableCurso from "../../components/curso/tablaCursoAlum/AlumTableCurso";
 import FormEditCurso from "../../components/curso/formEditCurso/FormEditCurso";
 import "./curso.css"
@@ -32,14 +32,14 @@ function Curso() {
   }
   //const eliminaAlumno 
   const eliminarButton = ()=> {
-      swal({
+      swal.fire({
         title: "Eliminar Curso",
         text: '¿Está seguro que desea eliminar el curso?',
         icon: "warning",
         buttons: ["Cancelar", "Aceptar"]
       }).then(res =>{
         if(res){
-          swal({text: "El curso se ha eliminado correctamente",
+          swal.fire({text: "El curso se ha eliminado correctamente",
           icon: "success"
         })
         }
@@ -54,6 +54,7 @@ function Curso() {
         <hr/>
         <div className='orgFlex'>
           <div className='infoAlumno'>
+            <p className='textInfoAlumno'><strong>Id: </strong> {infoCurso.curso &&  infoCurso.curso.infoCurso.id} </p>
             <p className='textInfoAlumno'><strong>Profesor: </strong> 
             {infoCurso.curso == null? " No asignado" : infoCurso.curso.infoCurso.idProfesorNavigation==null
             ? "No asignado"
@@ -72,7 +73,7 @@ function Curso() {
         </div>
         <div>
           <Tabs >
-            <Tab eventKey="one" title="Alumnos Matriculados " className='tabs'>
+            <Tab eventKey="one" title="Alumnos Matriculados " className='tabs table-responsive'>
                 <AlumTableCurso alumno={infoCurso.curso && infoCurso.curso.matriculados}/>
             </Tab>
           </Tabs>

@@ -1,14 +1,13 @@
-import React, {useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import axios from 'axios'
 import { useParams } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 
 function FormAlumno({datosCurso}) {
-  const [facultades, setFacultades ] = useState([])
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   const [editForm, setEditForm] = useState({
@@ -20,19 +19,6 @@ function FormAlumno({datosCurso}) {
     "idDept": datosCurso.infoAlumno.idDeptNavigation.id
   });
   const {id} = useParams()
-
-  useEffect(()=>{
-    const getFacultades = async () =>{
-        try {
-            const response = await axios.get(`https://localhost:7268/api/Facultades`)
-            const {data} =  response
-            setFacultades(data)
-          } catch (error) {
-            console.log(error)
-        }
-    }
-    getFacultades()
-  }, [])
 
   const setField = (field, value)=>{
     setEditForm({
@@ -46,14 +32,14 @@ function FormAlumno({datosCurso}) {
       setShow(false)
       try {
         await axios.put(`https://localhost:7268/api/Alumnos/${id}`, editForm)
-        swal({text: "El alumno se ha actualizado correctamente",
+        swal.fire({text: "El alumno se ha actualizado correctamente",
         icon: "success",
         timer: 1200
       }).then(res =>{
         window.location.reload()
       })
       } catch (error) {
-        swal({
+        swal.fire({
             title: "Hubo un problema",
             text: "Por favor, intenlo de nuevo",
             icon: "error"

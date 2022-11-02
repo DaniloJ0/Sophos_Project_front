@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useParams } from "react-router-dom"
 import { Tab, Tabs } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
-import swal from 'sweetalert';
 import FormEditPro from '../../components/profesor/formEditProfesores/FormEditPro';
 import TablaCursoPro from '../../components/profesor/tablaCursoPro/TablaCursoPro';
 
@@ -61,7 +60,7 @@ function Profesor() {
           </div>
         </div>
         <div className='opciones'>
-          {formActive && <FormEditPro/>}
+          {formActive && <FormEditPro dataProf={profesores}/>}
         </div>
       </div>
     

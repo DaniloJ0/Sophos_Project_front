@@ -3,10 +3,10 @@ import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 function FormProfesores() {
-    const [show, setShow] = useState(true);
+  const [show, setShow] = useState(true);
   const [facultades, setFacultades] = useState([])
   const [form, setForm] = useState({
     "nombre": "",
@@ -44,14 +44,14 @@ function FormProfesores() {
     setShow(false)
     try {
       await axios.post("https://localhost:7268/api/profesores", form)
-      swal({text: "El profesor se ha creado correctamente",
+      swal.fire({text: "El profesor se ha creado correctamente",
       icon: "success",
       timer: 1000
     }).then(res =>{
       window.location.reload()
     })
     } catch (error) {
-      swal({
+      swal.fire({
           title: "Hubo un problema",
           text: "Pruebe seleccionando una facultad diferente antes de escoger la deseada",
           icon: "error"

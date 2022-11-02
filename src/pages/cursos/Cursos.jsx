@@ -42,7 +42,7 @@ useEffect(()=>{
                             <hr/>
                             <SwitchesCurso/>
                             <div className='btnCrearCurso'>
-                                <Button variant="outline-dark" onClick={editarButton}>Crear curso </Button>
+                                <Button variant="dark" onClick={editarButton}>Crear curso </Button>
                             </div>
                              {createOn && <FormCurso/>}
                         </div>       
@@ -51,10 +51,10 @@ useEffect(()=>{
             </div>
             <div>
                 <div className='cursosFlex'>
-                    {curso.map((course) => {
+                    {curso.map((course, index) => {
                         return (
-                            <div className="cardSingle">
-                                <a key={course.id} href={`cursos/${course.id}`} className="cursoLink">
+                            <div key={index} className="cardSingle">
+                                <a href={`cursos/${course.id}`} className="cursoLink">
                                     <SingleCurso dataCurso={course}/>
                                 </a>
                             </div>

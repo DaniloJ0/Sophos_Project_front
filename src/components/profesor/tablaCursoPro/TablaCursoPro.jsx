@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 function TablaCursoPro({datosCurso}) {
   return (
     datosCurso && datosCurso.length===0?
-    <p className='mensaje'>No parte ningún curso </p>:
+    <p className='mensaje'>No imparte ningún curso </p>:
     <Table striped bordered hover size="sm">
                 <thead>
                   <tr className='tableDesign'>

@@ -3,7 +3,7 @@ import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 // import {useNavigate} from 'react-router-dom'
 
@@ -45,14 +45,14 @@ function FormAlumnoDesp() {
     setShow(false)
     try {
       await axios.post("https://localhost:7268/api/Alumnos", form)
-      swal({text: "El alumno se ha creado correctamente",
+      swal.fire({text: "El alumno se ha creado correctamente",
       icon: "success",
       timer: 1000
     }).then(res =>{
       window.location.reload()
     })
     } catch (error) {
-      swal({
+      swal.fire({
           title: "Hubo un problema",
           text: "Pruebe seleccionando una facultad diferente antes de escoger la deseada",
           icon: "error"

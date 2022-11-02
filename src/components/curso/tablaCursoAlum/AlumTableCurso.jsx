@@ -8,7 +8,7 @@ function AlumTableCurso({alumno}) {
   return (
     alumno && alumno.length===0?
     <p className='mensaje'>No hay ningun alumno matriculado </p>:
-    <Table striped bordered hover size="sm">
+    <Table striped bordered hover size="sm" >
                 <thead>
                   <tr className='tableDesign'>
                     <th>Id</th>
