@@ -1,10 +1,11 @@
 .cardSingleHome{
     width: 18rem;
-    box-shadow: 5px 3px 5px rgb(98, 97, 97);
+    border-color: azure;
+    box-shadow:1px 1px 6px rgb(146, 146, 146);
 }
 
 .textCustom{
-    font-size: 8rem;
+    /* font-size: 5rem; */
 }
 
 .textCustom:hover{
@@ -17,3 +18,4 @@
     text-align: center;
     font-size: 100px;
 } */
+

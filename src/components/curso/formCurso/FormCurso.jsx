@@ -10,6 +10,8 @@ import "./formCurso.css"
 function FormCurso() {
   const [show, setShow] = useState(true);
   const [periodos, setPeriodos] = useState([])
+  const [formErrors, setFormErrors ] = useState({})
+  const [isSubmit, setIsSubmit ] = useState(false)
   const handleClose = () => setShow(false);
   const [createForm, setCreateForm] = useState({
     'nombre': null,
@@ -32,7 +34,6 @@ function FormCurso() {
       try {
         const response = await axios.get(`https://localhost:7268/api/periodos`)
         const { data } = response
-        console.log(data)
         setPeriodos(data)
       } catch (error) {
         console.log(error)
@@ -41,15 +42,26 @@ function FormCurso() {
     getPeriodos()
   }, [])
 
-  const createCourse = async () => {
+  useEffect(()=>{
+    console.log(formErrors)
+    if(Object.keys(formErrors).length ===0 && isSubmit){
+      console.log(createForm)
+    }
+  },[formErrors])
+
+
+  const createCourse = async (e) => {
+    // e.preventDefault();
     console.log("form", createForm)
-    setShow(false)
+    setFormErrors(validate(createForm))
+    setIsSubmit(true)
     try {
       await axios.post(`https://localhost:7268/api/cursos`, createForm)
       swal.fire({text: "El curso se ha creado correctamente",
       icon: "success",
       timer: 1200
     }).then(res =>{
+      setShow(false)
       window.location.reload()
     })
     } catch (error) {
@@ -61,7 +73,16 @@ function FormCurso() {
       })
     }
 }
-
+//<span className='text-danger'>*</span>
+const validate = (values) =>{
+    const errors = {}
+    const adver = "Este campo es requerido"
+    if(!values.nombre) errors.nombre = adver
+    if(!values.creditos) errors.creditos = adver
+    if(!values.cupos) errors.cupos = adver
+    if(!values.idPeriodo) errors.idPeriodo = adver
+    return errors
+}
   return (
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -75,13 +96,15 @@ function FormCurso() {
         <Form.Control type="text" 
          defaultValue ={createForm.nombre}
          onChange={(e)=> setField('nombre', e.target.value)} />
+         {formErrors.nombre && <p> <span className='text-danger'>*</span> {formErrors.nombre}</p>}
       </Form.Group>
 
       <Form.Label><strong> Creditos</strong> </Form.Label>
       <Form.Group className="mb-3" controlId="creditos">
         <Form.Control type="text" 
         defaultValue ={createForm.creditos}
-         onChange={(e)=> setField('creditos', e.target.value)} />
+        onChange={(e)=> setField('creditos', e.target.value)} />
+        {formErrors.creditos && <p> <span className='text-danger'>*</span> {formErrors.creditos}</p>}
       </Form.Group>
 
       <Form.Label ><strong> Cupos</strong> </Form.Label>
@@ -89,22 +112,21 @@ function FormCurso() {
         <Form.Control type="text" 
         defaultValue ={createForm.cupos}
          onChange={(e)=> setField('cupos', e.target.value)} />
+        {formErrors.cupos && <p> <span className='text-danger'>*</span> {formErrors.cupos}</p>}
       </Form.Group>
 
       <Form.Label><strong>Profesor </strong>  (Opcional)</Form.Label>
       <Form.Group className="mb-3" controlId="idProfesor">
         <Form.Control type="text"  
         defaultValue ={createForm.idProfesor}
-        onChange={(e)=> setField('idProfesor', e.target.value)}
-        />
+        onChange={(e)=> setField('idProfesor', e.target.value)}/>
       </Form.Group>
 
       <Form.Label><strong>Id pre-requisito</strong> (Opcional)</Form.Label>
       <Form.Group className="mb-3" controlId="idCursoPre">
         <Form.Control type="text" 
         defaultValue ={createForm.idCursoPre}
-         onChange={(e)=> setField('idCursoPre', e.target.value)}
-        />
+        onChange={(e)=> setField('idCursoPre', e.target.value)}/>
       </Form.Group>
 
       <Form.Label><strong>Periodo </strong> </Form.Label>
@@ -117,6 +139,7 @@ function FormCurso() {
               )
             })}
           </Form.Select>
+        {formErrors.idPeriodo && <p> <span className='text-danger'>*</span> {formErrors.idPeriodo}</p>}
         </Form.Group>
         </Form>
         </Modal.Body>
