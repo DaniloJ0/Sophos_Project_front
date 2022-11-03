@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate} from "react-router-dom"
 import { Tab, Tabs } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert2';
@@ -13,6 +13,8 @@ function Curso() {
   const {id} = useParams()
   const [infoCurso, setCursos] = useState([])
   
+  const navigate = useNavigate()
+
   useEffect(()=>{
     const getCurso = async () => {
       try {
@@ -31,19 +33,23 @@ function Curso() {
     setFormAct(!formActive)
   }
   //const eliminaAlumno 
-  const eliminarButton = ()=> {
+  const eliminarButton = async()=> {
+    try {
+      await axios.delete(`https://localhost:7268/api/Cursos/${id}`)
       swal.fire({
-        title: "Eliminar Curso",
-        text: '¿Está seguro que desea eliminar el curso?',
-        icon: "warning",
-        buttons: ["Cancelar", "Aceptar"]
-      }).then(res =>{
-        if(res){
-          swal.fire({text: "El curso se ha eliminado correctamente",
-          icon: "success"
-        })
-        }
+        text: "El curso se ha eliminado correctamente",
+        icon: "success",
+        timer: 1000
+      }).then(res => {
+        navigate('/Cursos');
       })
+    } catch (error) {
+      swal.fire({
+        title: "Opss...",
+        text: error.response.data,
+        icon: "error",
+      })
+    }
   }
 
   return (

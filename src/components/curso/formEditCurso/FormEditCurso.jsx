@@ -69,8 +69,23 @@ const validate = (values) =>{
   const errors = {}
   const adver = "Este campo es requerido"
   if(!values.nombre) errors.nombre = adver
-  if(!values.creditos) errors.creditos = adver
-  if(!values.cupos) errors.cupos = adver
+
+  if(isNaN(values.creditos)){
+    errors.creditos = "Campo no valido, ingrese solamente digitos"
+  }else if(values.creditos>20){ 
+    errors.creditos = "El número de creditos es grande (max 20)"
+  }else if(!values.creditos){ 
+    errors.creditos = adver
+  }
+
+  if(isNaN(values.cupos)){
+    errors.cupos = "Campo no valido, ingrese solamente digitos"
+  }else if(values.cupos>110){ 
+    errors.cupos = "El número de cupos es grande (max 110)"
+  }else if(!values.cupos){ 
+    errors.cupos = adver
+  }
+  
   return errors
 }
   return (

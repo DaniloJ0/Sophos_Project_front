@@ -28,6 +28,7 @@ function Profesores() {
     getProfesores()
   }, [])
   
+  
   return (
       <div className='flexProfesor'>
         <div className='searchBar'>

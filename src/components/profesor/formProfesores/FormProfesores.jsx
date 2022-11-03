@@ -82,7 +82,14 @@ function FormProfesores() {
       }
         
       if(!values.maxTitulo) errors.maxTitulo = adver
-      if(!values.expYear) errors.expYear = adver
+
+      if(isNaN(values.expYear)){
+        errors.expYear = "Campo no valido, ingrese solamente digitos"
+      }else if(values.expYear >35){
+        errors.expYear = "El número es muy grande (max 35 años)"
+      }else if(!values.expYear) {
+        errors.expYear = adver
+      }
       if(!values.idDept) errors.idDept = adver
       return errors
   }
