@@ -7,9 +7,8 @@ import swal from 'sweetalert2';
 
 // import {useNavigate} from 'react-router-dom'
 
-function FormAlumnoDesp() {
+function FormAlumnoDesp({facultades}) {
   const [show, setShow] = useState(true);
-  const [facultades, setFacultades] = useState([])
   const [formErrors, setFormErrors ] = useState({})
   const [isSubmit, setIsSubmit ] = useState(false)
   const [form, setForm] = useState({
@@ -20,22 +19,6 @@ function FormAlumnoDesp() {
     "idDept": ""
   });
 
-  // const navigate  = useNavigate()
-  useEffect(() => {
-    const getFacultades = async () => {
-      try {
-        const response = await axios.get(`https://localhost:7268/api/Facultades`)
-        const { data } = response
-        console.log(data)
-        setFacultades(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getFacultades()
-  }, [])
-
-  
  const setField = (field, value)=>{
    setForm({
      ...form,
@@ -141,7 +124,6 @@ function FormAlumnoDesp() {
               {facultades.map(facu => {
                 return (<option key={facu.id}> {facu.name}</option>)
               })}
-
             </Form.Select>
          {formErrors.idDept && <p> <span className='text-danger'>*</span> {formErrors.idDept}</p>}
           </Form.Group>

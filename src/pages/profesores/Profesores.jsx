@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
@@ -8,50 +8,57 @@ import FormProfesores from '../../components/profesor/formProfesores/FormProfeso
 
 
 function Profesores() {
-  const [profesores, setProfesores ] = useState([])
-  const [createOn, setCreateCourse] = useState(false)
-  const editarButton = () => {
-    setCreateCourse(!createOn)
-    //Pasar info al formulario
-}
-  useEffect(()=>{
-    const getProfesores = async () =>{
-        try {
-            const response = await axios.get(`https://localhost:7268/api/Profesores`)
-            const {data} =  response
-            console.log(data)
-            setProfesores(data)
-          } catch (error) {
-            console.log(error)
-        }
+    const [profesores, setProfesores] = useState([])
+    const [search, setSearch] = useState("")
+    const [createOn, setCreateCourse] = useState(false)
+    const editarButton = () => {
+        setCreateCourse(!createOn)
     }
-    getProfesores()
-  }, [])
-  
-  
-  return (
-      <div className='flexProfesor'>
-        <div className='searchBar'>
-            <div className="searchSection">
-                <h3 className='mensaje my-4'>Profesores</h3>
-                <Form className="buscador">
-                    <Form.Control
-                    type="search"
-                    placeholder="Buscar profesor"
-                    className="me-2 my-1"
-                    aria-label="Search"
-                    />
-                    <Button variant="outline-success" className='btnFormBuscar'>Buscar</Button>
-                </Form>
-                <hr/>
-            
-                <div className='text-center my-4'>
-                    <Button variant="dark" onClick={editarButton}>Crear profesor </Button>
+    useEffect(() => {
+        const getProfesores = async () => {
+            try {
+                const response = await axios.get(`https://localhost:7268/api/Profesores`)
+                const { data } = response
+                console.log(data)
+                setProfesores(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getProfesores()
+    }, [])
+
+    const searchProfesor = (e) => setSearch(e.target.value)
+    const removeAccents = (str) =>  str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+
+    const searched = !search
+        ?profesores 
+        :profesores.filter(pro =>removeAccents(`${pro.nombre} ${pro.apellido}`).includes(search.toLowerCase()))
+
+    return (
+        <div className='flexProfesor'>
+            <div className='searchBar'>
+                <div className="searchSection">
+                    <h3 className='mensaje my-4 fw-bold'>Profesores</h3>
+                    <Form className="buscador">
+                        <Form.Control
+                            type="search"
+                            placeholder="Buscar profesor"
+                            className="me-2 my-1"
+                            aria-label="Search"
+                            value={search}
+                            onChange={searchProfesor}
+                        />
+                    </Form>
+                    <hr />
+
+                    <div className='text-center my-4'>
+                        <Button variant="dark" onClick={editarButton}>Crear profesor </Button>
+                    </div>
+                    {createOn && <FormProfesores />}
                 </div>
-                {createOn && <FormProfesores />}
-            </div>          
-        </div>
-        <div className='table-responsive tableProps  tableProf '>
+            </div>
+            <div className='table-responsive tableProps  tableProf '>
                 {profesores && profesores.length === 0 ?
                     <p className='mensaje'>No hay ningún profesor </p> :
                     <Table striped bordered hover size="sm">
@@ -66,7 +73,7 @@ function Profesores() {
                         </thead>
                         <tbody>
                             {
-                                profesores && profesores.map((prof, index) => {
+                                profesores && searched.map((prof, index) => {
                                     return (
                                         <tr key={index} className='tableDesign'>
                                             <td><a href={`/profesores/${prof.id}`} className='linkId' ><strong>{prof.id}</strong></a></td>
@@ -81,8 +88,8 @@ function Profesores() {
                         </tbody>
                     </Table>}
             </div>
-      </div>
-  )
+        </div>
+    )
 }
 
 export default Profesores
